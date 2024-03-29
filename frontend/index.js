@@ -64,17 +64,35 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     });
    
     //cards.appendChild(card);
-
+    
     card.addEventListener('click', () => {
-      document.querySelectorAll('.card').forEach(card => {
+      // Check if the clicked card is already selected
+      if (card.classList.contains('selected')) {
+        // If it is, remove 'selected' class and update 'info' text content
         card.classList.remove('selected');
-        info.textContent = `The selected learner is ${learner.fullName}`
-        
+        info.textContent = "No learner is selected";
         nameH3.textContent = learner.fullName;
-      });
-      card.classList.add('selected');
-      nameH3.textContent = learner.fullName + `, ID: ${learner.id}`;
+      } else {
+        // If it's not, remove 'selected' class from all cards
+        document.querySelectorAll('.card').forEach(card => {
+          card.classList.remove('selected');
+        });
+        // Add 'selected' class to the clicked card and update 'info' and 'nameH3' text content
+        card.classList.add('selected');
+        info.textContent = `The selected learner is ${learner.fullName}`
+        nameH3.textContent = learner.fullName + `, ID: ${learner.id}`;
+      }
     });
+    // card.addEventListener('click', () => {
+    //   document.querySelectorAll('.card').forEach(card => {
+    //     card.classList.remove('selected');
+    //     info.textContent = `The selected learner is ${learner.fullName}`
+        
+    //     nameH3.textContent = learner.fullName;
+    //   });
+    //   card.classList.add('selected');
+    //   nameH3.textContent = learner.fullName + `, ID: ${learner.id}`;
+    // });
 
     mentorsH4.addEventListener('click', () => {
       document.querySelectorAll('h4')
@@ -133,14 +151,14 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     console.log(err)
     return err
     }
-    
-    document.addEventListener('click', evt => {
-      if (evt.target === document.querySelector('section')) {
-        const learners = document.querySelectorAll('.card')
-        info.textContent = "No learner is selected";
-        learners.forEach(card => card.classList.remove('selected')) 
-      }
-    })
+
+    // document.addEventListener('click', evt => {
+    //   if (evt.target === document.querySelector('selection')) {
+    //     const learners = document.querySelectorAll('.card')
+    //     info.textContent = "No learner is selected";
+    //     learners.forEach(card => card.classList.remove('selected')) 
+    //   }
+    // })
 
 
 
